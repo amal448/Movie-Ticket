@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS
   }
 });
-console.log("user,pass",user,pass);
+console.log("user,pass", process.env.SMTP_USER, process.env.SMTP_PASS);
 
 const sendMail = async ({to,subject,body}) => {
 const response=  await transporter.sendMail({
