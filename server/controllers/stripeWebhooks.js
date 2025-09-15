@@ -31,6 +31,8 @@ export const stripeWebhooks = async (request, response) => {
                     paymentLink: ""
                 })
                 //send Confirmation email
+                console.log("email triggered");
+                
                 await inngest.send({
                     name:'app/show.booked',
                     data:{bookingId}
