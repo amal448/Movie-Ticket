@@ -10,13 +10,19 @@ const transporter = nodemailer.createTransport({
 console.log("user,pass", process.env.SMTP_USER, process.env.SMTP_PASS);
 
 const sendMail = async ({to,subject,body}) => {
-const response=  await transporter.sendMail({
-    from: process.env.SENDER_EMAIL,
-    to,
-    subject,
-    // text: "Your movie ticket is confirmed!",
-    html: body,
-  });
-  return response
+  try{
+    const response=  await transporter.sendMail({
+        from: process.env.SENDER_EMAIL,
+        to,
+        subject,
+        // text: "Your movie ticket is confirmed!",
+        html: body,
+      });
+      return response
+  }catch(error)
+  {
+    console.log("sendMail",error);
+    
+  }
 }
 export default sendMail
