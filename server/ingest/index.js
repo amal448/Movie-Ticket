@@ -3,7 +3,7 @@ import User from "../models/User.js";
 import ConnectDb from "../configs/db.js";
 import Booking from "../models/Booking.js";
 import Show from "../models/Shows.js";
-
+import sendMail from "../configs/nodemailer.js";
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "movie-ticket-booking" });
 
@@ -93,6 +93,9 @@ const sendBookingConfirmationEmail = inngest.createFunction(
       path: 'show',
       populate: { path: 'movie', model: 'Movie' }
     }).populate('user')
+
+
+
     await sendMail({
       to: booking.user.email,
       subject: `Payment Confirmation "${booking.show.movie.title}" booked !`,
